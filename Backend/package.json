@@ -1,0 +1,29 @@
+{
+  "name": "khaleddiab's-stable",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+  "start": "node src/index.js",
+  "dev": "env-cmd -f ./config/dev.env nodemon src/app.js",
+  "start:prod": "env-cmd -f ./config/prod.env node src/app.js",
+  "test": "env-cmd -f ./config/test.env jest --watch --runInBand"
+},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cloudinary": "^1.41.3",
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.4.1",
+    "multer": "^2.1.1",
+    "multer-storage-cloudinary": "^4.0.0"
+  },
+  "devDependencies": {
+    "env-cmd": "^11.0.0",
+    "nodemon": "^3.1.14"
+  }
+}

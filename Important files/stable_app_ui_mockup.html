@@ -1,0 +1,209 @@
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font-sans); }
+.shell { display: flex; height: 580px; border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); overflow: hidden; background: var(--color-background-tertiary); }
+.sidebar { width: 180px; background: var(--color-background-primary); border-right: 0.5px solid var(--color-border-tertiary); display: flex; flex-direction: column; padding: 20px 0; flex-shrink: 0; }
+.logo { padding: 0 16px 20px; font-size: 15px; font-weight: 500; color: var(--color-text-primary); border-bottom: 0.5px solid var(--color-border-tertiary); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+.logo-icon { width: 28px; height: 28px; border-radius: var(--border-radius-md); background: #1D9E75; display: flex; align-items: center; justify-content: center; }
+.logo-icon svg { width: 16px; height: 16px; }
+.nav-item { display: flex; align-items: center; gap: 10px; padding: 9px 16px; font-size: 13px; color: var(--color-text-secondary); cursor: pointer; border-radius: 0; transition: background 0.15s; }
+.nav-item:hover { background: var(--color-background-secondary); color: var(--color-text-primary); }
+.nav-item.active { background: #E1F5EE; color: #085041; font-weight: 500; }
+.nav-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; opacity: 0.5; flex-shrink: 0; }
+.nav-item.active .nav-dot { background: #1D9E75; opacity: 1; }
+.nav-section { font-size: 11px; color: var(--color-text-tertiary); padding: 16px 16px 6px; letter-spacing: 0.04em; }
+.main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+.topbar { background: var(--color-background-primary); border-bottom: 0.5px solid var(--color-border-tertiary); padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
+.topbar-title { font-size: 15px; font-weight: 500; color: var(--color-text-primary); }
+.topbar-sub { font-size: 12px; color: var(--color-text-tertiary); margin-top: 2px; }
+.add-btn { font-size: 12px; color: #085041; background: #E1F5EE; border: 0.5px solid #5DCAA5; border-radius: var(--border-radius-md); padding: 6px 14px; cursor: pointer; font-weight: 500; }
+.content { flex: 1; padding: 16px 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 14px; }
+.stat-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.stat-card { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 12px 14px; }
+.stat-label { font-size: 11px; color: var(--color-text-tertiary); margin-bottom: 4px; }
+.stat-val { font-size: 22px; font-weight: 500; color: var(--color-text-primary); }
+.stat-sub { font-size: 11px; color: var(--color-text-tertiary); margin-top: 2px; }
+.section-label { font-size: 12px; font-weight: 500; color: var(--color-text-secondary); margin-bottom: 6px; }
+.horse-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.horse-card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 12px 14px; cursor: pointer; }
+.horse-card:hover { border-color: var(--color-border-secondary); }
+.horse-avatar { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 500; margin-bottom: 8px; }
+.horse-name { font-size: 13px; font-weight: 500; color: var(--color-text-primary); }
+.horse-breed { font-size: 11px; color: var(--color-text-tertiary); margin-top: 2px; }
+.badge { display: inline-block; font-size: 10px; padding: 2px 7px; border-radius: 99px; margin-top: 6px; font-weight: 500; }
+.badge-green { background: #E1F5EE; color: #085041; }
+.badge-amber { background: #FAEEDA; color: #633806; }
+.badge-blue  { background: #E6F1FB; color: #0C447C; }
+.activity-list { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); overflow: hidden; }
+.activity-item { display: flex; align-items: center; gap: 12px; padding: 10px 14px; border-bottom: 0.5px solid var(--color-border-tertiary); font-size: 12px; }
+.activity-item:last-child { border-bottom: none; }
+.activity-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.activity-text { color: var(--color-text-primary); flex: 1; }
+.activity-time { color: var(--color-text-tertiary); }
+.page { display: none; }
+.page.active { display: flex; flex-direction: column; gap: 14px; }
+.table-card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); overflow: hidden; }
+table { width: 100%; font-size: 12px; border-collapse: collapse; table-layout: fixed; }
+th { background: var(--color-background-secondary); color: var(--color-text-secondary); font-weight: 500; padding: 8px 12px; text-align: left; border-bottom: 0.5px solid var(--color-border-tertiary); }
+td { padding: 9px 12px; color: var(--color-text-primary); border-bottom: 0.5px solid var(--color-border-tertiary); }
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: var(--color-background-secondary); }
+</style>
+
+<div class="shell">
+  <div class="sidebar">
+    <div class="logo">
+      <div class="logo-icon">
+        <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3 12 C3 8 5 5 8 4 C11 5 13 8 13 12" stroke="white" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+          <circle cx="8" cy="3" r="1.5" fill="white"/>
+        </svg>
+      </div>
+      Stable
+    </div>
+    <span class="nav-section">Main</span>
+    <div class="nav-item active" onclick="showPage('dashboard', this)"><div class="nav-dot"></div>Dashboard</div>
+    <div class="nav-item" onclick="showPage('horses', this)"><div class="nav-dot"></div>My horses</div>
+    <span class="nav-section">Manage</span>
+    <div class="nav-item" onclick="showPage('feeding', this)"><div class="nav-dot"></div>Feeding</div>
+    <div class="nav-item" onclick="showPage('training', this)"><div class="nav-dot"></div>Training</div>
+    <div class="nav-item" onclick="showPage('expenses', this)"><div class="nav-dot"></div>Expenses</div>
+  </div>
+
+  <div class="main">
+    <div class="topbar">
+      <div>
+        <div class="topbar-title" id="page-title">Dashboard</div>
+        <div class="topbar-sub" id="page-sub">Saturday, May 2 2026</div>
+      </div>
+      <div class="add-btn" id="add-btn" onclick="sendPrompt('How do I build the Add Horse form?')">+ Add horse ↗</div>
+    </div>
+
+    <div class="content">
+
+      <div class="page active" id="page-dashboard">
+        <div class="stat-row">
+          <div class="stat-card"><div class="stat-label">Horses</div><div class="stat-val">4</div><div class="stat-sub">in stable</div></div>
+          <div class="stat-card"><div class="stat-label">Sessions this week</div><div class="stat-val">7</div><div class="stat-sub">training</div></div>
+          <div class="stat-card"><div class="stat-label">This month</div><div class="stat-val">EGP 3,240</div><div class="stat-sub">expenses</div></div>
+          <div class="stat-card"><div class="stat-label">Feeding today</div><div class="stat-val">4/4</div><div class="stat-sub">completed</div></div>
+        </div>
+        <div>
+          <div class="section-label">My horses</div>
+          <div class="horse-row">
+            <div class="horse-card" onclick="sendPrompt('How do I build the Horse Profile page?')">
+              <div class="horse-avatar" style="background:#E1F5EE;color:#085041;">AR</div>
+              <div class="horse-name">Areeq</div>
+              <div class="horse-breed">Arabian · 6 yrs</div>
+              <span class="badge badge-green">Active</span>
+            </div>
+            <div class="horse-card">
+              <div class="horse-avatar" style="background:#FAEEDA;color:#633806;">NR</div>
+              <div class="horse-name">Nour</div>
+              <div class="horse-breed">Thoroughbred · 4 yrs</div>
+              <span class="badge badge-amber">In training</span>
+            </div>
+            <div class="horse-card">
+              <div class="horse-avatar" style="background:#E6F1FB;color:#0C447C;">ST</div>
+              <div class="horse-name">Sultan</div>
+              <div class="horse-breed">Barb · 8 yrs</div>
+              <span class="badge badge-blue">Resting</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="section-label">Recent activity</div>
+          <div class="activity-list">
+            <div class="activity-item"><div class="activity-dot" style="background:#1D9E75"></div><div class="activity-text">Areeq — morning feed completed</div><div class="activity-time">7:30 AM</div></div>
+            <div class="activity-item"><div class="activity-dot" style="background:#BA7517"></div><div class="activity-text">Nour — 45 min dressage session</div><div class="activity-time">9:00 AM</div></div>
+            <div class="activity-item"><div class="activity-dot" style="background:#E24B4A"></div><div class="activity-text">Farrier visit — EGP 850</div><div class="activity-time">11:00 AM</div></div>
+            <div class="activity-item"><div class="activity-dot" style="background:#1D9E75"></div><div class="activity-text">Sultan — afternoon feed completed</div><div class="activity-time">3:00 PM</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="page" id="page-horses">
+        <div class="table-card">
+          <table>
+            <thead><tr><th>Name</th><th>Breed</th><th>Age</th><th>Status</th><th>Last vet</th></tr></thead>
+            <tbody>
+              <tr><td>Areeq</td><td>Arabian</td><td>6 yrs</td><td><span class="badge badge-green">Active</span></td><td>Jan 2026</td></tr>
+              <tr><td>Nour</td><td>Thoroughbred</td><td>4 yrs</td><td><span class="badge badge-amber">Training</span></td><td>Mar 2026</td></tr>
+              <tr><td>Sultan</td><td>Barb</td><td>8 yrs</td><td><span class="badge badge-blue">Resting</span></td><td>Feb 2026</td></tr>
+              <tr><td>Layla</td><td>Arabian</td><td>3 yrs</td><td><span class="badge badge-amber">Training</span></td><td>Apr 2026</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="page" id="page-feeding">
+        <div class="stat-row" style="grid-template-columns:repeat(3,1fr)">
+          <div class="stat-card"><div class="stat-label">Today's feeds</div><div class="stat-val">4/4</div><div class="stat-sub">done</div></div>
+          <div class="stat-card"><div class="stat-label">Scheduled</div><div class="stat-val">2×</div><div class="stat-sub">daily per horse</div></div>
+          <div class="stat-card"><div class="stat-label">Feed cost</div><div class="stat-val">EGP 640</div><div class="stat-sub">this month</div></div>
+        </div>
+        <div class="table-card">
+          <table>
+            <thead><tr><th>Horse</th><th>Time</th><th>Feed type</th><th>Amount</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td>Areeq</td><td>7:30 AM</td><td>Hay + pellets</td><td>5 kg</td><td><span class="badge badge-green">Done</span></td></tr>
+              <tr><td>Nour</td><td>7:30 AM</td><td>Grain mix</td><td>4 kg</td><td><span class="badge badge-green">Done</span></td></tr>
+              <tr><td>Sultan</td><td>3:00 PM</td><td>Hay</td><td>6 kg</td><td><span class="badge badge-green">Done</span></td></tr>
+              <tr><td>Layla</td><td>3:00 PM</td><td>Hay + pellets</td><td>4 kg</td><td><span class="badge badge-amber">Pending</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="page" id="page-training">
+        <div class="table-card">
+          <table>
+            <thead><tr><th>Horse</th><th>Date</th><th>Type</th><th>Duration</th><th>Notes</th></tr></thead>
+            <tbody>
+              <tr><td>Nour</td><td>May 2</td><td>Dressage</td><td>45 min</td><td>Good progress</td></tr>
+              <tr><td>Areeq</td><td>May 2</td><td>Endurance</td><td>60 min</td><td>Trail ride</td></tr>
+              <tr><td>Layla</td><td>May 1</td><td>Lunging</td><td>30 min</td><td>Basic commands</td></tr>
+              <tr><td>Nour</td><td>Apr 30</td><td>Jumping</td><td>50 min</td><td>1m obstacles</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="page" id="page-expenses">
+        <div class="stat-row">
+          <div class="stat-card"><div class="stat-label">This month</div><div class="stat-val">EGP 3,240</div></div>
+          <div class="stat-card"><div class="stat-label">Feed</div><div class="stat-val">EGP 640</div></div>
+          <div class="stat-card"><div class="stat-label">Vet & farrier</div><div class="stat-val">EGP 1,800</div></div>
+          <div class="stat-card"><div class="stat-label">Other</div><div class="stat-val">EGP 800</div></div>
+        </div>
+        <div class="table-card">
+          <table>
+            <thead><tr><th>Date</th><th>Category</th><th>Description</th><th style="text-align:right">Amount</th></tr></thead>
+            <tbody>
+              <tr><td>May 2</td><td>Farrier</td><td>Areeq — shoeing</td><td style="text-align:right">EGP 850</td></tr>
+              <tr><td>May 1</td><td>Feed</td><td>Monthly hay delivery</td><td style="text-align:right">EGP 640</td></tr>
+              <tr><td>Apr 28</td><td>Vet</td><td>Nour — dental check</td><td style="text-align:right">EGP 950</td></tr>
+              <tr><td>Apr 25</td><td>Equipment</td><td>New saddle pad</td><td style="text-align:right">EGP 800</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+const titles = { dashboard: ['Dashboard', 'Saturday, May 2 2026'], horses: ['My horses', '4 horses registered'], feeding: ['Feeding schedules', 'Today\'s plan'], training: ['Training sessions', 'Log & history'], expenses: ['Expenses', 'Costs & records'] };
+const btnLabels = { dashboard: '+ Add horse', horses: '+ Add horse', feeding: '+ Add feed', training: '+ Log session', expenses: '+ Add expense' };
+function showPage(id, el) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  el.classList.add('active');
+  document.getElementById('page-title').textContent = titles[id][0];
+  document.getElementById('page-sub').textContent = titles[id][1];
+  document.getElementById('add-btn').textContent = btnLabels[id] + ' ↗';
+}
+</script>

@@ -1,0 +1,19 @@
+# Backend
+Backend/node_modules
+Backend/.env
+Backend/config/dev.env
+Backend/config/prod.env
+Backend/config/test.env
+
+# Frontend
+Frontend/node_modules
+Frontend/dist
+Frontend/dist-ssr
+Frontend/*.local
+
+# Editor / OS
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.log
