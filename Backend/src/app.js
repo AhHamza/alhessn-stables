@@ -14,7 +14,6 @@ app.use(cors());
 app.use(horseRouter);
 app.use(bookingRouter);
 app.use(userRouter);
-app.use(inquiryRouter);
 console.log("My Secret is:", process.env.JWT_SECRET);
 
 app.listen(3000, () => {
