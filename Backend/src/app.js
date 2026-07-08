@@ -9,7 +9,6 @@ const app = express();
 const horseRouter = require("./routes/horse");
 const userRouter = require("./routes/user");
 const bookingRouter = require("./routes/booking");
-const inquiryRouter = require("./routes/Inquiry");
 app.use(express.json()); //must be before routes
 app.use(cors());
 app.use(horseRouter);
