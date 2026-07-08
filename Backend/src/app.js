@@ -1,6 +1,4 @@
 require("dotenv").config();
-console.log("DB URL:", process.env.MONGODB_URL);
-
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
