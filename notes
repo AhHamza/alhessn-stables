@@ -1,0 +1,12 @@
+Tailwind: "you get the ergonomics of inline with the full power of css"
+
+- you don't have to create classes there are predifined
+  names that tells how the element will be styled
+- in css class defined, I have to go to the class to know what does the class do to the element
+
+- useState: Lets a component "remember" values between renders.
+
+- useeffect: tells React: "Do something after the component shows up on the screen."
+  useEffect(() => {
+  // Your code here (the effect)
+  }, [dependencies]); dependencies-> when it changes, run whats inside useeffect, if it is empty then only run it once when (onMount)
