@@ -25,8 +25,20 @@ export default function Navbar() {
                     <Link to="/contact" className="text-sm tracking-widest uppercase text-gray-400 hover:text-cream transition-colors">
                         Contact
                     </Link>
-                    <Link to="/inquire" className="bg-gold text-dark text-sm font-semibold px-7 py-2  tracking-widest uppercase hover:bg-gold-light transition-colors">
+                    <Link to="/inquire" className="bg-gold text-dark text-sm font-semibold px-7 py-2 tracking-widest uppercase hover:bg-gold-light transition-colors">
                         Buy a Horse
+                    </Link>
+
+                    {/* Admin */}
+                    <Link
+                        to="/admin/login"
+                        title="Admin"
+                        className="text-gray-600 hover:text-gold transition-colors"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 11-4 0v-.09a1.65 1.65 0 00-1-1.51 1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 110-4h.09a1.65 1.65 0 001.51-1 1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 114 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 110 4h-.09a1.65 1.65 0 00-1.51 1z" />
+                        </svg>
                     </Link>
                 </div>
 

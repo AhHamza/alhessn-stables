@@ -8,16 +8,24 @@ const horseRouter = require("./routes/horse");
 const userRouter = require("./routes/user");
 const bookingRouter = require("./routes/booking");
 app.use(express.json()); //must be before routes
-app.use(cors());
+
+const corsOptions = {
+  origin: [
+    "https://alhessn-stables-frontend.vercel.app",
+    "http://localhost:5173", // remove this line once you no longer need local frontend testing against prod
+  ],
+  credentials: true,
+};
+app.use(cors(corsOptions));
+
 app.use(horseRouter);
 app.use(bookingRouter);
 app.use(userRouter);
-console.log("My Secret is:", process.env.JWT_SECRET);
 
-app.listen(3000, () => {
-  console.log("listening to port 3000");
-});
-
+const PORT = process.env.PORT || 3000;
+   app.listen(PORT, () => {
+     console.log(`listening on port ${PORT}`);
+   });
 mongoose.connection.once("open", () => {
   console.log("connected to mongoDB: ", mongoose.connection.name);
 });

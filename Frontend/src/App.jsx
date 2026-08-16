@@ -94,7 +94,6 @@ export default function App() {
               </ProtectedRoute>
             }
           />
-          <Route path="/admin/horses/:id/edit" element={<HorseForm />} />
         </Routes>
       </main>
       <Footer />
