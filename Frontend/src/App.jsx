@@ -8,7 +8,6 @@ import BuyInquiry from "./pages/BuyInquiry";
 import Contact from "./pages/Contact";
 import About from "./pages/About";
 import Footer from "./components/Footer";
-import Test from "./pages/Test";
 import ProtectedRoute from "./components/ProtectedRoute";
 import AdminLogin from "./pages/admin/Login";
 import AdminDashboard from "./pages/admin/Dashboard";
@@ -31,7 +30,6 @@ export default function App() {
           <Route path="/inquire/:horseId?" element={<BuyInquiry />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/about" element={<About />} />
-          <Route path="/test" element={<Test />} />
           <Route path="/admin/login" element={<AdminLogin />} />
 
           <Route
