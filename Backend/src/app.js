@@ -7,6 +7,7 @@ const app = express();
 const horseRouter = require("./routes/horse");
 const userRouter = require("./routes/user");
 const bookingRouter = require("./routes/booking");
+const inquiryRouter = require("./routes/inquiry")
 app.use(express.json()); //must be before routes
 
 const corsOptions = {
@@ -21,6 +22,7 @@ app.use(cors(corsOptions));
 app.use(horseRouter);
 app.use(bookingRouter);
 app.use(userRouter);
+app.use(inquiryRouter);
 
 const PORT = process.env.PORT || 3000;
    app.listen(PORT, () => {
