@@ -1,6 +1,6 @@
 const express = require('express')
 const router = new express.Router()
-const Inquiry = require('../models/inquiry')
+const Inquiry = require('../models/Inquiry')
 const auth = require('../middleware/auth')
 
 // PUBLIC: Submit an inquiry
