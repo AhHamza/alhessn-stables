@@ -1,6 +1,6 @@
 Backend/node_modules
 Frontend/node_modules
-Backend/config/dev.env
+Backend/config/.env
 Backend/config/prod.env
 Backend/config/test.env
 Frontend/dist
