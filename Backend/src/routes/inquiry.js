@@ -3,7 +3,6 @@ const router = new express.Router()
 const Inquiry = require('../models/inquiry')
 const auth = require('../middleware/auth')
 
-router.post("/", createInquiry);
 // PUBLIC: Submit an inquiry
 router.post('/inquiries', async (req, res) => {
     const inquiry = new Inquiry(req.body)
